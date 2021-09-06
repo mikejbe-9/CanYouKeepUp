@@ -6,6 +6,7 @@ public class TimeRewind : MonoBehaviour
 {
     public bool isRewinding;
     public float recordTime = 5f;
+    public int rewindSlots = 5;
 
     private List<PointInTime> pointsInTime;
     private Health health;
@@ -18,9 +19,12 @@ public class TimeRewind : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && rewindSlots > 0)
         {
-            StartRewind();
+            if (health.currentHealth > 0)
+            {
+                StartRewind();
+            }
         }
         if (Input.GetKeyUp(KeyCode.R))
         {
@@ -61,6 +65,7 @@ public class TimeRewind : MonoBehaviour
     void StartRewind()
     {
         isRewinding = true;
+        rewindSlots--;
     }
 
     void StopRewind()
