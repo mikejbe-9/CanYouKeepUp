@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +8,13 @@ public class TimeRewind : MonoBehaviour
     public float recordTime = 5f;
     public int rewindSlots = 5;
 
+    public PlayerCharacterController input;
     private List<PointInTime> pointsInTime;
     private Health health;
 
     void Start()
     {
+        input = GetComponent<PlayerCharacterController>();
         pointsInTime = new List<PointInTime>();
         health = GetComponent<Health>();
     }
@@ -64,12 +66,14 @@ public class TimeRewind : MonoBehaviour
 
     void StartRewind()
     {
+        input.enabled = false;
         isRewinding = true;
         rewindSlots--;
     }
 
     void StopRewind()
     {
+        input.enabled = true;
         isRewinding = false;
     }
 }
